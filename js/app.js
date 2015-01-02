@@ -1,5 +1,26 @@
 goog.require('goog.array');
 
+/** Super Class for the Elements on the canvas
+* @constructor 
+**/
+var Element = function(x, y, sprite) {
+    this.x = x;
+    this.y = y;
+    this.sprite = sprite;
+};
+
+Element.prototype.update = function() {
+    return;
+};
+
+Element.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
+Element.prototype.getRectangle = function() {
+    return [this.x, this.x + 101, this.y, this.y + 83];  
+}
+
 // Enemies our player must avoid
 var Enemy = function(x, y, v) {
     // Variables applied to each of our instances go here,
@@ -7,15 +28,14 @@ var Enemy = function(x, y, v) {
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-    this.x = x;
-    this.y = y;
+    Element.call(this, x, y, "images/enemy-bug.png");
+//    this.sprite = 'images/enemy-bug.png';
+//    this.x = x;
+//    this.y = y;
     this.v = v; //speed
-}
+}; 
 
-Enemy.prototype.getRectangle = function() {
-    return [this.x, this.x + 101, this.y, this.y + 83];
-};
+Enemy.prototype = Object.create(Element.prototype);
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -32,23 +52,19 @@ Enemy.prototype.update = function(dt) {
 }
 
 // Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
+/*Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+}*/
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
 /** @constructor */
 var Player = function(){
-    this.x = 200;
-    this.y = 400;
-    this.sprite = 'images/char-boy.png'
+    Element.call(this, 200, 400, "images/char-boy.png");
 };
 
-Player.prototype.getRectangle = function() {
-    return [this.x, this.x + 101, this.y, this.y + 83]
-};
+Player.prototype = Object.create(Element.prototype);
 
 /**
  * Check if it hits the enemies
@@ -91,9 +107,11 @@ Player.prototype.update = function() {
  * @return {number} This returns something that has a description too long to
  *     fit in one line.
  */
+ /*
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+*/
 
 Player.prototype.handleInput = function(key) {
     console.log(this.x, this.y);
