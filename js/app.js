@@ -1,7 +1,11 @@
 goog.require('goog.array');
 
-/** Super Class for the Elements on the canvas
+/** 
+* Super Class for the Elements on the canvas
 * @constructor 
+* @param {number} x Initial location x-asis
+* @param {number} y Initial location y-asis
+* @param {string} sprite Logo image path
 **/
 var Element = function(x, y, sprite) {
     this.x = x;
@@ -9,19 +13,35 @@ var Element = function(x, y, sprite) {
     this.sprite = sprite;
 };
 
+/** 
+* Update the enemy's position, required method for game
+**/
 Element.prototype.update = function() {
     return;
 };
 
+/** 
+* Draw the enemy on the screen, required method for game
+**/
 Element.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
+/** 
+* Return the location of the element
+* @return {Array} x1, x2, y1, y2
+**/
 Element.prototype.getRectangle = function() {
     return [this.x, this.x + 101, this.y, this.y + 83];  
 }
 
-// Enemies our player must avoid
+/** 
+* Enemies our player must avoid
+* @constructor 
+* @param {number} x Initial location x-asis
+* @param {number} y Initial location y-asis
+* @param {number} v speed of the enemy
+**/
 var Enemy = function(x, y, v) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -29,16 +49,15 @@ var Enemy = function(x, y, v) {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     Element.call(this, x, y, "images/enemy-bug.png");
-//    this.sprite = 'images/enemy-bug.png';
-//    this.x = x;
-//    this.y = y;
-    this.v = v; //speed
+    this.v = v; 
 }; 
 
 Enemy.prototype = Object.create(Element.prototype);
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
+/** 
+* Update the enemy's position, required method for game
+* @param {number} dt a time delta between ticks
+**/
 Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
@@ -51,15 +70,12 @@ Enemy.prototype.update = function(dt) {
     }
 }
 
-// Draw the enemy on the screen, required method for game
-/*Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}*/
-
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
-/** @constructor */
+/** 
+* Now write your own player class
+* This class requires an update(), render() and
+* a handleInput() method.
+* @constructor 
+*/
 var Player = function(){
     Element.call(this, 200, 400, "images/char-boy.png");
 };
@@ -68,10 +84,6 @@ Player.prototype = Object.create(Element.prototype);
 
 /**
  * Check if it hits the enemies
- * @param {string} foo This is a param with a description too long to fit in
- *     one line.
- * @return {number} This returns something that has a description too long to
- *     fit in one line.
  */
 Player.prototype.update = function() {
     var isHit = false;
@@ -100,19 +112,10 @@ Player.prototype.update = function() {
 
 };
 
-/**
- * Illustrates line wrapping for long param/return descriptions.
- * @param {string} foo This is a param with a description too long to fit in
- *     one line.
- * @return {number} This returns something that has a description too long to
- *     fit in one line.
- */
- /*
-Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
-*/
-
+/** 
+* Move the player based on users input
+* @param {string} key input from user
+**/
 Player.prototype.handleInput = function(key) {
     console.log(this.x, this.y);
     if (!key)
@@ -141,7 +144,6 @@ var addEnemy = function() {
 addEnemy();
 
 var player = new Player();
-
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
