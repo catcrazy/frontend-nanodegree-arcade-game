@@ -1,4 +1,4 @@
-goog.require('goog.array');
+//goog.require('goog.array');
 
 /** 
 * Super Class for the Elements on the canvas
@@ -66,7 +66,8 @@ Enemy.prototype.update = function(dt) {
 
     // end of canvas
     if (this.x > 505) {
-        goog.array.remove(allEnemies, this);
+        allEnemies.splice(allEnemies.indexOf(this), 1);
+        //goog.array.remove(allEnemies, this);
     }
 }
 
