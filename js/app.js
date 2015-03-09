@@ -1,8 +1,8 @@
 //goog.require('goog.array');
 
-/** 
+/**
 * Super Class for the Elements on the canvas
-* @constructor 
+* @constructor
 * @param {number} x Initial location x-asis
 * @param {number} y Initial location y-asis
 * @param {string} sprite Logo image path
@@ -13,31 +13,31 @@ var Element = function(x, y, sprite) {
     this.sprite = sprite;
 };
 
-/** 
+/**
 * Update the enemy's position, required method for game
 **/
 Element.prototype.update = function() {
     return;
 };
 
-/** 
+/**
 * Draw the enemy on the screen, required method for game
 **/
 Element.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-/** 
+/**
 * Return the location of the element
 * @return {Array} x1, x2, y1, y2
 **/
 Element.prototype.getRectangle = function() {
-    return [this.x, this.x + 101, this.y, this.y + 83];  
+    return [this.x, this.x + 101, this.y, this.y + 83];
 }
 
-/** 
+/**
 * Enemies our player must avoid
-* @constructor 
+* @constructor
 * @param {number} x Initial location x-asis
 * @param {number} y Initial location y-asis
 * @param {number} v speed of the enemy
@@ -49,12 +49,12 @@ var Enemy = function(x, y, v) {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     Element.call(this, x, y, "images/enemy-bug.png");
-    this.v = v; 
-}; 
+    this.v = v;
+};
 
 Enemy.prototype = Object.create(Element.prototype);
 
-/** 
+/**
 * Update the enemy's position, required method for game
 * @param {number} dt a time delta between ticks
 **/
@@ -71,11 +71,11 @@ Enemy.prototype.update = function(dt) {
     }
 }
 
-/** 
+/**
 * Now write your own player class
 * This class requires an update(), render() and
 * a handleInput() method.
-* @constructor 
+* @constructor
 */
 var Player = function(){
     Element.call(this, 200, 400, "images/char-boy.png");
@@ -106,14 +106,14 @@ Player.prototype.update = function() {
     };
 
     // if it goes out of canvas
-    if (this.x > 405 || this.x < -100 || this.y > 400 || this.y < -50) {
+    if (this.x > 405 || this.x < -100 || this.y > 400 || this.y < -10) {
     	this.x = 200;
     	this.y = 400;
     }
 
 };
 
-/** 
+/**
 * Move the player based on users input
 * @param {string} key input from user
 **/
@@ -137,7 +137,7 @@ var addEnemy = function() {
     var rand_loc = init_loc[parseInt(Math.random() * 3)];
     var rand_v = parseInt(Math.random() * 300 + 100);
 
-    var en = new Enemy(rand_loc[0], rand_loc[1], rand_v); 
+    var en = new Enemy(rand_loc[0], rand_loc[1], rand_v);
     allEnemies.push(en);
     setTimeout(addEnemy, 1000);
 };

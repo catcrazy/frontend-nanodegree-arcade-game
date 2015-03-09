@@ -5,10 +5,11 @@ Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015
 
 for self-checking their submission.
 
-1. Use cursol key to move the human icon (player).
-2. Avoid player to be hit by enemy.
-3. Enemy appears randomly.
-4. Player will be initiated when...
-4.1. Hit by enemy
-4.2. Move outside the game area
-5. Try to move the player accross the road without being hit by enemy.
+1. Open index.html in browser.
+2. Use cursol key to move the human icon (player).
+3. Avoid player to be hit by enemy.
+4. Enemy appears randomly.
+5. Player will be initiated when...
+5.1. Hit by enemy
+6.2. Move outside the game area
+6. Try to move the player accross the road without being hit by enemy.
